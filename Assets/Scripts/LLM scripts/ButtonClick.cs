@@ -23,14 +23,19 @@ public class ButtonClick : MonoBehaviour
         var activeTouches = Touch.activeTouches;
         if (activeTouches.Count > 0)
         {
-            var primaryTouchData = EnhancedSpatialPointerSupport.GetPointerState(activeTouches[0]);
-            if (activeTouches[0].phase == TouchPhase.Began)
+            foreach (var touch in Touch.activeTouches)
             {
-                if (primaryTouchData.Kind == SpatialPointerKind.IndirectPinch || primaryTouchData.Kind == SpatialPointerKind.Touch)
+                if(touch.phase == touchPhase.Began)
                 {
-                    Press();
+                    SpatialPointerState touchData = EnhancedSpatialPointerSupport.GetPointerState(touch);
+                    if(touchData.targetObject == gameObject)
+                    {
+                        Press();
+                    }
+
                 }
             }
+            
         }
     }
     public void Press()
