@@ -5,9 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/TestIInteraction.unity
+    guid: 5bf9bafcd2ecc43f9b017b3ca2280343
+  - enabled: 0
+    path: Assets/Scenes/Trial.unity
+    guid: b2f58993442ba9b4c937a9047e56d87e
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/HeartMR.unity
+    guid: 4cc6ddbda799845fcb207202f6deab81
   m_configObjects:
     UnityEditor.XR.VisionOS.VisionOSSettings: {fileID: 11400000, guid: 316c2081e82fc4653bfde27421963766, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
