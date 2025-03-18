@@ -6,6 +6,9 @@ import tempfile
 import os
 import logging
 from TTS.api import TTS
+import inference as infer
+import query_data as query
+from create_database import DataStoreInit
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -53,10 +56,18 @@ def transcribe():
         # Clean up the temporary file
         os.remove(temp_path)
         os.rmdir(temp_dir)
+
+        #Making llm inferences
+        parts = []
+        parts.append(infer.extract_heart_part(text))
+        query_response = query.runMain(text)
+
         
         return jsonify({
             'status': 'success',
-            'transcription': text
+            'transcription': text,
+            'part': parts,
+            'query_response': query_response
         })
     
     except Exception as e:
@@ -108,5 +119,30 @@ def health_check():
         'tts': 'available' if tts is not None else 'unavailable'
     }})
 
+
+@app.route('/get_part', methods=['POST'])
+def get_part():
+    if not request.is_json or 'text' not in request.json:
+        return jsonify({'error': 'No text provided or invalid JSON'}), 400
+    try:
+        text = request.json['text']
+        part = infer.extract_heart_part(text)
+        return jsonify({
+            'part': part
+        })
+
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'error': str(e)
+        }), 500
+
+
 if __name__ == '__main__':
+
+    if(os.path.isdir("chroma")):
+        print("Data base already created!!!")
+    else:
+        database_creation = DataStoreInit()
+        database_creation.generate_data_store()
     app.run(host='0.0.0.0', port=5000)
