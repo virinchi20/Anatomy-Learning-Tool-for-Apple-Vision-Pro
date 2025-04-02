@@ -8,7 +8,7 @@ namespace InputSupport
 {
     public class WhisperServerProcessor : MonoBehaviour
     {
-        [SerializeField] private string serverUrl = "http://localhost:5000/transcribe";
+        [SerializeField] private string serverUrl = "http://172.20.10.5:8080/transcribe";
         [SerializeField] private TextMeshPro statusText;
         [SerializeField] private bool debugMode = false;
         

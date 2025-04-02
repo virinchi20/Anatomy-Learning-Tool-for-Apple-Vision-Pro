@@ -1,0 +1,78 @@
+<?xml version ="1.0"?>
+<materialx version = "1.38" colorspace = "lin_rec709">
+    <multiply name = "_1" type = "float">
+        <input name = "in1" type = "float" nodename = "_2" />
+        <input name = "in2" type = "float" value = "2" />
+    </multiply>
+    <subtract name = "_2" type = "float">
+        <input name = "in2" type = "float" nodename = "_3" />
+        <input name = "in1" type = "float" value = "1" />
+    </subtract>
+    <ifgreatereq name = "_3" type = "float">
+        <input name = "value2" type = "float" value = "0" />
+        <input name = "value1" type = "float" nodename = "_4" />
+        <input name = "in1" type = "float" value = "1" />
+        <input name = "in2" type = "float" value = "0" />
+    </ifgreatereq>
+    <dotproduct name = "_4" type = "float">
+        <input name = "in1" type = "vector3" nodename = "_5" />
+        <input name = "in2" type = "vector3" nodename = "_PlaneNormal" />
+    </dotproduct>
+    <subtract name = "_5" type = "vector3">
+        <input name = "in1" type = "vector3" nodename = "_13" />
+        <input name = "in2" type = "vector3" nodename = "_PlanePosition" />
+    </subtract>
+    <convert name = "_6" type = "vector4">
+        <input name = "in" type = "vector3" nodename = "_7" />
+    </convert>
+    <multiply name = "_7" type = "vector3">
+        <input name = "in1" type = "vector3" nodename = "_8" />
+        <input name = "in2" type = "vector3" value = "1,1,-1" />
+    </multiply>
+    <position name = "_8" type = "vector3">
+        <input name = "space" type = "string" value = "world" />
+    </position>
+    <constant name = "_PlanePosition" type = "vector3">
+        <input name = "value" type = "vector3" value = "0,0,0" />
+    </constant>
+    <constant name = "_PlaneNormal" type = "vector3">
+        <input name = "value" type = "vector3" value = "0,1,0" />
+    </constant>
+    <constant name = "_BaseColor" type = "color4">
+        <input name = "value" type = "color4" value = "0,0,0,0" />
+    </constant>
+    <constant name = "_Alpha" type = "float">
+        <input name = "value" type = "float" value = "1" />
+    </constant>
+    <constant name = "_PlaneEnabled" type = "float">
+        <input name = "value" type = "float" value = "1" />
+    </constant>
+    <ifgreater name = "_9" type = "float">
+        <input name = "in1" type = "float" nodename = "_1" />
+        <input name = "in2" type = "float" value = "0" />
+        <input name = "value1" type = "float" nodename = "_10" />
+    </ifgreater>
+    <absval name = "_10" type = "float">
+        <input name = "in" type = "float" nodename = "_PlaneEnabled" />
+    </absval>
+    <GeometryModification name = "_11" type = "vertexshader">
+    </GeometryModification>
+    <realitykit_unlit name = "_12" type = "surfaceshader">
+        <input name = "applyPostProcessToneMap" type = "boolean" value = "false" />
+        <input name = "color" type = "color3" nodename = "_14" />
+        <input name = "opacity" type = "float" nodename = "_Alpha" />
+        <input name = "opacityThreshold" type = "float" nodename = "_9" />
+    </realitykit_unlit>
+    <surfacematerial name = "USD_UnlitClippableShader" type = "material">
+        <input name = "vertexshader" type = "vertexshader" nodename = "_11" />
+        <input name = "surfaceshader" type = "surfaceshader" nodename = "_12" />
+    </surfacematerial>
+    <swizzle name = "_13" type = "vector3">
+        <input name = "in" type = "vector4" nodename = "_6" />
+        <input name = "channels" type = "string" value = "xyz" />
+    </swizzle>
+    <swizzle name = "_14" type = "color3">
+        <input name = "in" type = "color4" nodename = "_BaseColor" />
+        <input name = "channels" type = "string" value = "rgb" />
+    </swizzle>
+</materialx>

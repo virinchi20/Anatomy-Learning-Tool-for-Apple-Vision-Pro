@@ -1,0 +1,124 @@
+<?xml version ="1.0"?>
+<materialx version = "1.38" colorspace = "lin_rec709">
+    <multiply name = "_1" type = "float">
+        <input name = "in1" type = "float" nodename = "_2" />
+        <input name = "in2" type = "float" value = "2" />
+    </multiply>
+    <subtract name = "_2" type = "float">
+        <input name = "in2" type = "float" nodename = "_3" />
+        <input name = "in1" type = "float" value = "1" />
+    </subtract>
+    <ifgreatereq name = "_3" type = "float">
+        <input name = "value2" type = "float" value = "0" />
+        <input name = "value1" type = "float" nodename = "_4" />
+        <input name = "in1" type = "float" value = "1" />
+        <input name = "in2" type = "float" value = "0" />
+    </ifgreatereq>
+    <dotproduct name = "_4" type = "float">
+        <input name = "in1" type = "vector3" nodename = "_5" />
+        <input name = "in2" type = "vector3" nodename = "_PlaneNormal" />
+    </dotproduct>
+    <constant name = "_PlaneNormal" type = "vector3">
+        <input name = "value" type = "vector3" value = "0,1,0" />
+    </constant>
+    <subtract name = "_5" type = "vector3">
+        <input name = "in1" type = "vector3" nodename = "_20" />
+        <input name = "in2" type = "vector3" nodename = "_PlanePosition" />
+    </subtract>
+    <constant name = "_PlanePosition" type = "vector3">
+        <input name = "value" type = "vector3" value = "0,0,0" />
+    </constant>
+    <convert name = "_6" type = "vector4">
+        <input name = "in" type = "vector3" nodename = "_7" />
+    </convert>
+    <multiply name = "_7" type = "vector3">
+        <input name = "in1" type = "vector3" nodename = "_8" />
+        <input name = "in2" type = "vector3" value = "1,1,-1" />
+    </multiply>
+    <position name = "_8" type = "vector3">
+        <input name = "space" type = "string" value = "world" />
+    </position>
+    <constant name = "_BaseColor" type = "color4">
+        <input name = "value" type = "color4" value = "0,0,0,0" />
+    </constant>
+    <constant name = "Vector1_593468358e764da4840c26ba06654d38" type = "float">
+        <input name = "value" type = "float" value = "0" />
+    </constant>
+    <constant name = "Vector1_fb14eb6d795c4cb1b85182bc7ccf5613" type = "float">
+        <input name = "value" type = "float" value = "0.5" />
+    </constant>
+    <constant name = "_PlaneEnabled" type = "float">
+        <input name = "value" type = "float" value = "1" />
+    </constant>
+    <ifgreater name = "_9" type = "float">
+        <input name = "in1" type = "float" nodename = "_1" />
+        <input name = "in2" type = "float" value = "0" />
+        <input name = "value1" type = "float" nodename = "_10" />
+    </ifgreater>
+    <absval name = "_10" type = "float">
+        <input name = "in" type = "float" nodename = "_PlaneEnabled" />
+    </absval>
+    <dot name = "_11" type = "vector4">
+        <input name = "in" type = "vector4" nodename = "_21" />
+    </dot>
+    <extract name = "_12" type = "float">
+        <input name = "in" type = "vector4" nodename = "_11" />
+        <input name = "index" type = "integer" value = "0" />
+    </extract>
+    <extract name = "_13" type = "float">
+        <input name = "in" type = "vector4" nodename = "_11" />
+        <input name = "index" type = "integer" value = "1" />
+    </extract>
+    <extract name = "_14" type = "float">
+        <input name = "in" type = "vector4" nodename = "_11" />
+        <input name = "index" type = "integer" value = "2" />
+    </extract>
+    <extract name = "_15" type = "float">
+        <input name = "in" type = "vector4" nodename = "_11" />
+        <input name = "index" type = "integer" value = "3" />
+    </extract>
+    <constant name = "_Coat_Smoothness" type = "float">
+        <input name = "value" type = "float" value = "0" />
+    </constant>
+    <constant name = "_Coat_Mask" type = "float">
+        <input name = "value" type = "float" value = "0" />
+    </constant>
+    <GeometryModification name = "_16" type = "vertexshader">
+    </GeometryModification>
+    <realitykit_pbr name = "_17" type = "surfaceshader">
+        <input name = "baseColor" type = "color3" nodename = "_22" />
+        <input name = "metallic" type = "float" nodename = "Vector1_593468358e764da4840c26ba06654d38" />
+        <input name = "emissiveColor" type = "color3" value = "0,0,0" />
+        <input name = "ambientOcclusion" type = "float" value = "1" />
+        <input name = "opacity" type = "float" nodename = "_15" />
+        <input name = "opacityThreshold" type = "float" nodename = "_9" />
+        <input name = "clearcoat" type = "float" nodename = "_Coat_Mask" />
+        <input name = "specular" type = "float" value = "0.5" />
+        <input name = "roughness" type = "float" nodename = "_18" />
+        <input name = "clearcoatRoughness" type = "float" nodename = "_19" />
+    </realitykit_pbr>
+    <surfacematerial name = "USD_ClippableTransparentShader" type = "material">
+        <input name = "vertexshader" type = "vertexshader" nodename = "_16" />
+        <input name = "surfaceshader" type = "surfaceshader" nodename = "_17" />
+    </surfacematerial>
+    <subtract name = "_18" type = "float">
+        <input name = "in1" type = "float" value = "1" />
+        <input name = "in2" type = "float" nodename = "Vector1_fb14eb6d795c4cb1b85182bc7ccf5613" />
+    </subtract>
+    <subtract name = "_19" type = "float">
+        <input name = "in1" type = "float" value = "1" />
+        <input name = "in2" type = "float" nodename = "_Coat_Smoothness" />
+    </subtract>
+    <swizzle name = "_20" type = "vector3">
+        <input name = "in" type = "vector4" nodename = "_6" />
+        <input name = "channels" type = "string" value = "xyz" />
+    </swizzle>
+    <swizzle name = "_21" type = "vector4">
+        <input name = "in" type = "color4" nodename = "_BaseColor" />
+        <input name = "channels" type = "string" value = "rgba" />
+    </swizzle>
+    <swizzle name = "_22" type = "color3">
+        <input name = "in" type = "color4" nodename = "_BaseColor" />
+        <input name = "channels" type = "string" value = "rgb" />
+    </swizzle>
+</materialx>

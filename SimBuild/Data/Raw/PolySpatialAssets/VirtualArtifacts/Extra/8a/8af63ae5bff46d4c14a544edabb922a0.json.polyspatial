@@ -1,0 +1,1 @@
+{"properties":[{"name":"_PlanePosition","type":3},{"name":"_PlaneNormal","type":3},{"name":"_BaseColor","type":4},{"name":"_Alpha","type":1},{"name":"_PlaneEnabled","type":1}],"cullMode":2,"zTestMode":4,"zWriteControl":0,"castShadows":true,"allowMaterialOverride":false}

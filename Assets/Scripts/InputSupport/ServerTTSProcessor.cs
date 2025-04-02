@@ -8,7 +8,7 @@ namespace InputSupport
 {
     public class ServerTTSProcessor : MonoBehaviour
     {
-        [SerializeField] private string serverUrl = "http://localhost:5000/synthesize";
+        [SerializeField] private string serverUrl = "http://172.20.10.5:8080/synthesize";
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private bool debugMode = false;
         
